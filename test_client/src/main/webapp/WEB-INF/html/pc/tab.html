@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理系统</title>
+    <meta name="author" content="DeathGhost"/>
+    <link rel="stylesheet" type="text/css" href="/note/css/style.css"/>
+    <script src="/note/js/html5.js"></script>
+    <script src="/note/js/jquery.js"></script>
+    <script src="/note/js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+<body>
+#parse("../html/common/header.html")
+<section class="rt_wrap content mCustomScrollbar">
+    <div class="rt_content">
+        <script>
+            $(document).ready(function () {
+                $("#loading").click(function () {
+                    $(".loading_area").fadeIn();
+                    $(".loading_area").fadeOut(1500);
+                });
+            });
+        </script>
+        <!--弹出框效果-->
+        <script>
+            $(document).ready(function () {
+                //弹出文本性提示框
+                $("#showPopTxt").click(function () {
+                    $(".pop_bg").fadeIn();
+                });
+                //弹出：确认按钮
+                $(".trueBtn").click(function () {
+                    alert("你点击了确认！");//测试
+                    $(".pop_bg").fadeOut();
+                });
+                //弹出：取消或关闭按钮
+                $(".falseBtn").click(function () {
+                    alert("你点击了取消/关闭！");//测试
+                    $(".pop_bg").fadeOut();
+                });
+            });
+        </script>
+        <section class="pop_bg">
+            <div class="pop_cont">
+                <!--title-->
+                <h3>查询标签</h3>
+                <!--content-->
+                <div class="pop_cont_input">
+                    <ul>
+                        <li>
+                            <span>标签名称</span>
+                            <input type="text" placeholder="" class="textbox"/>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">科目</span>
+                            <select class="select">
+                                <option>科目</option>
+                                <option>数学</option>
+                                <option>语文</option>
+                                <option>英语</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">年级</span>
+                            <select class="select">
+                                <option>初一</option>
+                                <option>初二</option>
+                                <option>初三</option>
+                                <option>高一</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">章节</span>
+                            <select class="select">
+                                <option>上册第三章</option>
+                                <option>上册第四章</option>
+                                <option>下册第二章</option>
+                                <option>下册第三章</option>
+                            </select>
+                    </ul>
+                </div>
+                <!--以pop_cont_text分界-->
+                <div class="pop_cont_text">
+                   如确认无误请点击查询按钮
+                </div>
+                <div class="btm_btn">
+                    <input type="button" value="查询" class="input_btn trueBtn"/>
+                    <input type="button" value="关闭" class="input_btn falseBtn"/>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2><strong style="color:grey;">标签管理</strong></h2>
+        </section>
+        <div class="page_title">
+            <h2 class="fl">已有标签</h2>
+            <!--&lt;!&ndash;<input placeholder="请输入关键信息" class="input" type="text"/>&ndash;&gt;-->
+            <!--<a class="fr top_rt_btn">查询</a>-->
+            <button class=" fr top_rt_btn link_btn" id="showPopTxt">查询</button>
+        </div>
+        <table class="table ">
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>年级</th>
+                <th>书本</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+             #foreach($tab in $tabList)
+            <tr>
+                <td style="width:65px;">
+                    <div class="cut_title ellipsis">${tab.tab_id}</div>
+                </td>
+                <td>${tab.tab_name}</td>
+                <td>${tab.sub_name}</td>
+                <td>${tab.book_name}</td>
+                <td>${tab.create_time}</td>
+                <td>
+                    <a href="/note/tab/del?tabId=${tab.tab_id}" class="inner_btn">&nbsp; 删除 &nbsp;</a>
+                    <a href="#" class="inner_btn">&nbsp; 修改 &nbsp;</a>
+                </td>
+            </tr>
+            #end
+        </table>
+        <aside class="paging">
+            <a>第一页</a>
+            <a>1</a>
+            <a>2</a>
+            <a>3</a>
+            <a>…</a>
+            <a>1004</a>
+            <a>最后一页</a>
+        </aside>
+
+
+        <section>
+            <h2><strong style="color:grey;">新建标签</strong></h2>
+
+
+            <ul class="ulColumn2">
+                <li>
+                    <span class="item_name" style="width:120px;">标签名称</span>
+                    <input type="text" id="tab" class="textbox textbox_295" placeholder="请简洁明了"/>
+                </li>
+                <li>
+                    <span class="item_name" style="width:120px;">科目</span>
+                    <select class="select" id="sub">
+                        <option value="1">语文</option>
+                        <option value="2">数学</option>
+                        <option value="3">英语</option>
+                        <option value="4">物理</option>
+                        <option value="5">化学</option>
+                        <option value="6">生物</option>
+                        <option value="7">地理</option>
+                        <option value="8">政治</option>
+                        <option value="9">历史</option>
+                    </select>
+                </li>
+                <li>
+                    <span class="item_name" style="width:120px;">书本</span>
+                    <select class="select" id="book">
+                        <option value="101">必修一</option>
+                        <option value="102">必修二</option>
+                        <option value="103">必修三</option>
+                        <option value="104">必修四</option>
+                        <option value="105">必修五</option>
+                        <option value="106">选修一</option>
+                        <option value="107">选修二</option>
+                        <option value="108">选修三</option>
+                        <option value="109">选修四</option>
+                        <option value="110">选修五</option>
+                    </select>
+                </li>
+                <!-- <li>
+                    <span class="item_name" style="width:120px;">章节</span>
+                    <select class="select">
+                        <option>上册第三章</option>
+                        <option>上册第四章</option>
+                        <option>下册第二章</option>
+                        <option>下册第三章</option>
+                    </select>
+                </li>
+                 -->
+                <li>
+                    <span class="item_name" style="width:120px;"></span>
+                    <input type="submit" id="submit" class="link_btn" value="提交"/>
+                </li>
+            </ul>
+
+
+        </section>
+        <script>
+            $(document).ready(function () {
+                //tab
+                $(".admin_tab li a").click(function () {
+                    var liindex = $(".admin_tab li a").index(this);
+                    $(this).addClass("active").parent().siblings().find("a").removeClass("active");
+                    $(".admin_tab_cont").eq(liindex).fadeIn(150).siblings(".admin_tab_cont").hide();
+                });
+            });
+            $("#submit").on("click",function(){
+            	var tab=$("#tab").val();
+            	var book=$("#book").val();
+            	var sub=$("#sub").val();
+            	$.post('/note/tab/addTab',
+            			{"tab":tab,"book":book,"sub":sub},
+            			function(rs){
+            				if(rs=="1"){
+            				alert("提交成功");
+            				location.href=location.href;
+            				}else{
+            					alert("提交失败");
+            					return;
+            			}
+            	})
+            })
+            
+        </script>
+    </div>
+</section>
+
+</body>
+</html>

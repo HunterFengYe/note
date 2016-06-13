@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.NoteDao" >
+    <!-- 新建状元笔记 -->
+    <insert id="addNote" parameterType="Map">
+        insert into note_note (note_title,note_body,note_image,note_type,create_user,create_time,note_own) 
+        values(#{title},#{body},#{imgName},1,#{userId},#{date},#{own})
+    </insert>
+    
+    <!-- 删除笔记 -->
+    <delete id="delNote" parameterType="Integer">
+        delete from note_note where note_id=#{noteId}
+    </delete>
+    
+    <!-- 修改笔记 -->
+    <update id="change" parameterType="Map">
+        update note_note set 
+        note_title=#{title},note_body=#{body},create_time=#{date}
+        where note_id=#{noteId}
+    </update>
+    
+    <!-- 我的笔记 -->
+    <select id="myNote" parameterType="Integer">
+        select * from note_note 
+        where create_user=#{userId}
+    </select>
+    <!-- 状元笔记 -->
+    <select id="getNote" resultType="Map">
+        select n.*
+        from note_note n
+        where n.note_type=1
+    </select>
+    <!-- 搜索笔记 -->
+    <select id="search"  resultType="Map">
+        select * from note_note where note_title like '%${search}%'
+    </select>
+</mapper>

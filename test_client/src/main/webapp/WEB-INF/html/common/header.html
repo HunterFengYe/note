@@ -1,0 +1,24 @@
+<meta charset="utf-8"/>
+<header>
+    <h1><img src="/note/image/admin_logo.png"/></h1>
+    <ul class="rt_nav">
+        <!--通过更改href链接可以回到起始页-->
+        <li><a href="http://www.baidu.com" target="_blank" class="website_icon">站点首页</a></li>
+        <li><a href="#" class="admin_icon">${userMap.user_name}</a></li>
+        <li><a href="#" class="set_icon">账号设置</a></li>
+        <li><a href="/note/user/logOut" class="quit_icon">安全退出</a></li>
+    </ul>
+</header>
+
+<!--aside nav-->
+<aside class="lt_aside_nav content mCustomScrollbar">
+    <h2>起始页</h2>
+    <ul>
+        <li>
+            <dl>
+                <dd><a class="active" href="/note/common/toIndex?phone=${userMap.user_phone}">笔记管理</a></dd>
+                <dd><a  href="/note/common/toTab">标签管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+</aside>

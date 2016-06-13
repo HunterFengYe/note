@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TabDao" >
+    <!-- 搜索标签 -->
+    <select id="search">
+        select * from note_tab 
+        where 1=1
+        <if test="null!=tabId"> and tab_id=#{tabId}</if>
+        <if test="null!=grade"> and tab_grade=#{grade}</if>
+        <if test="null!=sub"> and tab_sub=#{sub}</if>
+        <if test="null!=chapter"> and tab_chapter=#{chapter} </if>
+       
+    </select>
+    <!-- 新增标签 -->
+    <insert id="addTab" parameterType="Map">
+        insert into note_tab 
+        (tab_book,tab_sub,tab_name,tab_type,create_time,create_user)
+        values(#{book},#{sub},#{tabName},1,#{date},#{userId})
+    </insert>
+    <!-- 获取标签 -->
+    <select id="getTab" resultType="Map">
+        select
+        t.tab_id,
+        t.tab_name,
+        t.create_time,
+        s.sub_name,
+        b.book_name
+         from note_tab t
+         inner join note_sub s on s.sub_id=t.tab_sub
+         inner join note_book b on b.book_id=t.tab_book
+    </select>
+    
+    <!-- 删除标签 -->
+    <delete id="del" parameterType="Integer">
+        delete from note_tab where tab_id=#{tabId}
+    </delete>
+</mapper>

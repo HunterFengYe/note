@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.UserDao" >
+     <!-- 获取用户信息 -->
+     <select id="getUser" parameterType="String" resultType="Map">
+         select * from note_user 
+         where user_phone=#{phone}   
+     </select>
+     <!-- 注册 -->
+     <insert id="regist" parameterType="Map">
+         insert into note_user (user_name,user_phone,user_pwd,user_role,user_grade,create_time)
+         values(#{phone},#{phone},#{pwd},2,#{grade},#{date})
+     </insert>
+     <!-- 检查手机 -->
+     <select id="checkPhone" parameterType="String" resultType="Integer">
+         select  count(*) from note_user where user_phone=#{phone}
+     </select>
+</mapper>
